@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${sub.name}"></title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div th:if="${message}" class="row">
+                <div class="col d-flex flex-column align-items-center">
+                    <div class="alert alert-info" role="alert">
+                        <strong th:text="${message}"></strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <img th:src="'/img/' + ${sub.file}" width="100%" style="border-radius: 20px;"></div>
+            <div class="col">
+                <h1 th:text="${sub.name}"></h1>
+                <p>Срок действия: <span th:text="${sub.period}"></span> месяц(ев)</p>
+                <p>Приостановка: <span th:text="${sub.pause}"></span> дней</p>
+                <p>Цена:&nbsp;<span style="font-weight: bold;" th:text="${sub.stat.price.price}">100</span></p>
+                <p th:if="${sub.description.length() > 0}">Описание:&nbsp;<span th:text="${sub.description}"></span></p>
+                <form th:if="${role == 'MANAGER'}" method="post" th:action="'/subs/buy/' + ${sub.id}">
+                    <hr>
+                    <p class="lead">Выберите тренера и ребенка</p>
+                    <div class="row">
+                        <div class="col">
+                            <select class="form-select" name="trainerId">
+                                <option th:each="t : ${trainers}" th:value="${t.id}" th:label="${t.name}"></option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-select" name="userId">
+                                <option th:each="u : ${users}" th:value="${u.id}" th:label="${u.kid.kid}"></option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary" type="submit">Оформить</button>
+                        </div>
+                    </div>
+                </form>
+                <div th:if="${role == 'MANAGER'}" class="row">
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                    <div class="col-auto"><a class="btn btn-success" role="button" th:href="'/subs/edit/' + ${sub.id}">Редактировать</a>
+                    </div>
+                    <div class="col-auto"><a class="btn btn-danger" role="button" th:href="'/subs/delete/' + ${sub.id}">Удалить</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:insert="blocks/footer :: footer" class="bg-primary-gradient"></footer>
+</body>
+
+</html>

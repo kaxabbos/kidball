@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" style="--bs-primary-rgb: 35,55,120;" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Вход</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-4 mb-lg-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Вход</h2>
+            </div>
+        </div>
+        <div th:if="${param.error}" class="row">
+            <div class="col d-flex flex-column align-items-center">
+                <div class="alert alert-info" role="alert">
+                    <strong>Некорректный ввод логина или пароля!</strong>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6 col-xl-4">
+                <div class="card">
+                    <div class="card-body text-center d-flex flex-column align-items-center">
+                        <form method="post" action="/login">
+                            <div class="mb-3"><input class="form-control" type="text" placeholder="Введите логин"
+                                                     name="username" required=""></div>
+                            <div class="mb-3"><input class="form-control" type="password" placeholder="Введите пароль"
+                                                     name="password" required=""></div>
+                            <div class="mb-3">
+                                <button class="btn btn-primary shadow d-block w-100" type="submit">Вход</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:insert="blocks/footer :: footer" class="bg-primary-gradient"></footer>
+</body>
+</html>

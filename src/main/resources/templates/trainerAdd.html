@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить тренера</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+    <section class="py-5">
+        <div class="container py-5">
+            <div class="row mb-5">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class="fw-bold">Добавить тренера</h2>
+                </div>
+            </div>
+            <div th:if="${message}" class="row">
+                <div class="col d-flex flex-column align-items-center">
+                    <div class="alert alert-info" role="alert">
+                        <strong th:text="${message}"></strong>
+                    </div>
+                </div>
+            </div>
+            <form action="/trainers/add" method="post" enctype="multipart/form-data">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col"><input class="form-control" type="text" name="name" placeholder="ФИО тренера" required=""></div>
+                    <div class="col"><input class="form-control" type="text" name="tel" placeholder="Контакт" required=""></div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col"><input class="form-control" type="text" name="career" placeholder="Карьера (опционально)"></div>
+                    <div class="col"><input class="form-control" type="text" name="achievements" placeholder="Достижения (опционально)"></div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col"><input class="form-control" type="text" name="age" placeholder="Возраст групп" required=""></div>
+                    <div class="col"><input class="form-control" type="file" name="file" required="" accept="image/*"></div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-auto"><button class="btn btn-primary" type="submit">Добавить</button></div>
+                    <div class="col-auto"><button class="btn btn-dark" type="reset">Очистить</button></div>
+                </div>
+            </form>
+        </div>
+    </section>
+<footer th:insert="blocks/footer :: footer" class="bg-primary-gradient"></footer>
+</body>
+
+</html>

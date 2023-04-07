@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Регистрация</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-4 mb-lg-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Регистрация</h2>
+            </div>
+        </div>
+        <div th:if="${message}" class="row">
+            <div class="col d-flex flex-column align-items-center">
+                <div class="alert alert-info" role="alert">
+                    <strong th:text="${message}"></strong>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body text-center d-flex flex-column align-items-center">
+                <form method="post" action="/reg">
+                    <div class="mb-3"><input class="form-control" type="text" name="username"
+                                             placeholder="Введите логин" required=""></div>
+                    <div class="mb-3"><input class="form-control" type="password" name="password"
+                                             placeholder="Введите пароль" required=""></div>
+                    <div class="mb-3"><input class="form-control" type="text" placeholder="ФИО родителя"
+                                             name="parent" required=""></div>
+                    <div class="mb-3"><input class="form-control" type="text" placeholder="ФИО ребенка"
+                                             name="kid" required=""></div>
+                    <div class="mb-3"><input class="form-control" type="number" name="age" min="5" max="15" step="1"
+                                             placeholder="Возраст ребенка" required=""></div>
+                    <div class="mb-3"><input class="form-control" type="tel" placeholder="Номер телефона" name="tel"
+                                             required=""></div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary shadow d-block w-100" type="submit">Регистрация</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:insert="blocks/footer :: footer" class="bg-primary-gradient"></footer>
+</body>
+</html>

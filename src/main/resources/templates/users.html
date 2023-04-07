@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Пользователи</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Пользователи</h2>
+            </div>
+        </div>
+        <form th:each="u : ${users}" data-aos="zoom-in" method="post" th:action="'/users/edit/' + ${u.id}"
+              style="margin-bottom: 5px;">
+            <div class="row">
+                <div class="col"><input class="form-control" type="text" disabled th:value="${u.username}"></div>
+                <div class="col">
+                    <select class="form-select" name="role" required>
+                        <option th:each="r : ${roles}" th:value="${r}" th:label="${r.name}" th:selected="${r == u.role}"></option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit">Изменить</button>
+                </div>
+                <div class="col-auto"><a class="btn btn-danger" role="button" href="/users/delete/">Удалить</a></div>
+            </div>
+        </form>
+    </div>
+</section>
+<footer th:insert="blocks/footer :: footer" class="bg-primary-gradient"></footer>
+</body>
+</html>

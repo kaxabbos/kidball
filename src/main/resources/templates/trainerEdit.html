@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактировать тренера</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Редактировать тренера</h2>
+            </div>
+        </div>
+        <div th:if="${message}" class="row">
+            <div class="col d-flex flex-column align-items-center">
+                <div class="alert alert-info" role="alert">
+                    <strong th:text="${message}"></strong>
+                </div>
+            </div>
+        </div>
+        <form th:action="'/trainers/edit/' + ${trainer.id}" method="post" enctype="multipart/form-data">
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col"><input class="form-control" type="text" name="name" placeholder="ФИО тренера"
+                                        required="" th:value="${trainer.name}"></div>
+                <div class="col"><input class="form-control" type="text" name="tel" placeholder="Контакт" required=""
+                                        th:value="${trainer.tel}"></div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col"><input class="form-control" type="text" name="career"
+                                        placeholder="Карьера (опционально)" th:value="${trainer.career}"></div>
+                <div class="col"><input class="form-control" type="text" name="achievements"
+                                        placeholder="Достижения (опционально)" th:value="${trainer.achievements}"></div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col"><input class="form-control" type="text" name="age" placeholder="Возраст групп"
+                                        required="" th:value="${trainer.age}"></div>
+                <div class="col"><input class="form-control" type="file" name="file" accept="image/*"></div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit">Обновить</button>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-dark" type="reset">Очистить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<footer th:insert="blocks/footer :: footer" class="bg-primary-gradient"></footer>
+</body>
+
+</html>

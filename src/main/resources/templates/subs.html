@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Абонементы</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-4 mb-lg-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Абонементы</h2>
+            </div>
+        </div>
+        <div th:if="${role == 'MANAGER'}" class="row mb-4 mb-lg-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <a class="btn btn-primary" role="button" href="/subs/add">Добавить</a>
+            </div>
+        </div>
+        <div class="row mx-auto">
+            <div th:each="s : ${subs}" class="col-4" data-aos="zoom-in">
+                <a th:href="'/subs/' + ${s.id}"><img th:src="'/img/' + ${s.file}" width="100%"
+                                                     style="margin-bottom: 5px;border-radius: 5px;box-shadow: 0 0 10px 0 #cccccc;"></a>
+                <h1 th:text="${s.name}"></h1>
+                <p style="margin-bottom: 5px;">Цена: <span th:text="${s.stat.price.price}"></span></p>
+                <p style="margin-bottom: 5px;">Срок действия: <span th:text="${s.period}"> месяц(ев)</span></p>
+                <p style="margin-bottom: 5px;">Приостановка: <span th:text="${s.pause}"></span> дней</p>
+                <p th:if="${s.description.length() > 0}" >Короткое описание:  <span th:text="${s.description}"></span></p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:insert="blocks/footer :: footer" class="bg-primary-gradient"></footer>
+</body>
+
+</html>

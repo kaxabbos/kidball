@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить абонемент</title>
+</head>
+<head th:insert="blocks/head :: head"></head>
+<body>
+<div th:insert="blocks/nav :: nav"></div>
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="fw-bold">Добавить абонемент</h2>
+            </div>
+        </div>
+        <div th:if="${message}" class="row">
+            <div class="col d-flex flex-column align-items-center">
+                <div class="alert alert-info" role="alert">
+                    <strong th:text="${message}"></strong>
+                </div>
+            </div>
+        </div>
+        <form action="/subs/add" method="post" enctype="multipart/form-data">
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col"><input class="form-control" type="text" name="name" placeholder="Название" required/>
+                </div>
+                <div class="col"><input class="form-control" type="number" name="price" min="1" max="1000" step="1"
+                                        placeholder="Цена"/></div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col"><input class="form-control" type="number" placeholder="Срок действия (месяцев)" name="period"
+                                        min="1" max="60" step="1"/></div>
+                <div class="col"><input class="form-control" type="number" name="pause" min="1" max="100" step="1"
+                                        placeholder="Количество дней приостановки абонемента"/></div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col"><input class="form-control" type="text" name="description"
+                                        placeholder="Короткое описание (опционально)"/></div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col"><input class="form-control" type="file" name="file" required accept="image/*"/></div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit">Добавить</button>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-dark" type="reset">Очистить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<footer th:insert="blocks/footer :: footer" class="bg-primary-gradient"></footer>
+</body>
+
+</html>
